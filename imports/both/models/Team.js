@@ -1,4 +1,4 @@
-import Player from './Player'
+import Model from './Model'
 import Chaser from './Chaser'
 import Seeker from './Seeker'
 import Keeper from './Keeper'
@@ -7,7 +7,7 @@ import Idempotent from '../decorators/Idempotent'
 import SetupCollection from '../decorators/SetupCollection'
 
 @SetupCollection('Teams')
-class Team extends Player {
+class Team extends Model {
 
   // 3 chasers, 1 keeper, and 1 seeker per team according to the rules
   get seeker() {
