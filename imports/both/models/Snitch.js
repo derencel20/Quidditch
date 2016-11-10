@@ -12,7 +12,7 @@ class Snitch extends Model {
   }
 
   // returns the time(in milliSeconds) the snitch was caught
-  get timeAppeared() {
+  get duration() {
     return this.caught.getTime() - this.appeared.getTime()
   }
 
