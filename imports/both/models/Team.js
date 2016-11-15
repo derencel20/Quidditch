@@ -23,8 +23,10 @@ class Team extends Model {
     return Chaser.find({ teamId: this._id }).fetch()
   }
 
+  // since i've verified that the score formula for both the chaser and seeker works,
+  // i think there's no need for further testing since i'm only using reduce for adding
   get score() {
-    const chaserScores = this.chasers.reduce((memo, current) => (memo + current.score), 0)
+    const chaserScores = this.chasers.reduce((memo, chaser) => (memo + chaser.score), 0)
     return chaserScores + this.seeker.score
   }
 

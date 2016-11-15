@@ -1,13 +1,13 @@
 /* eslint-disable no-param-reassign */
 
-import Player from './Player'
+import Model from './Model'
 import Event from './Event'
 import Snitch from './Snitch'
 
 import SetupCollection from '../decorators/SetupCollection'
 
 @SetupCollection('Seekers')
-class Seeker extends Player {
+class Seeker extends Model {
 
   catch(snitch) {
     snitch.playerId = this._id

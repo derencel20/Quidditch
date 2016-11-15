@@ -6,6 +6,8 @@ import SetupCollection from '../decorators/SetupCollection'
 @SetupCollection('Keepers')
 class Keeper extends Model {
 
+  // I used a collection for blocks here since querying for the block count will be another chore
+  // example: I'll have to query for blocks() method like: Chaser.find({ shots: { $elemMatch } })
   block(chaser) {
     const block = new Block({ keeperId: this._id, chaserId: chaser._id })
     const id = block.save(() => {

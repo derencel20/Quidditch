@@ -1,42 +1,48 @@
-import Player from './Player'
-import Goal from './Goal'
+import _ from 'underscore'
+
+import Model from './Model'
 import Event from './Event'
-import Miss from './Miss'
+import Block from './Block'
 
 import SetupCollection from '../decorators/SetupCollection'
 
 @SetupCollection('Chasers')
-class Chaser extends Player {
+class Chaser extends Model {
 
-  // assuming na shoot iya gn tira
+  constructor(doc) {
+    super(doc)
+    this.shots = this.shots || []
+  }
+
   shoot() {
-    const goal = new Goal({ chaserId: this._id })
-    const id = goal.save(() => {
-      Event.insert({
-        notificationType: 'goal',
-        goalId: id,
-        date: new Date,
-      })
-    })
+    const goal = {
+      type: 'goal',
+      chaserId: this._id,
+    }
+    this.shots.push(goal)
+    Event.insert(_(goal).extend({ date: new Date }))
   }
 
   miss() {
-    const miss = new Miss({ chaserId: this._id })
-    const id = miss.save(() => {
-      Event.insert({
-        notificationType: 'miss',
-        missId: id,
-        date: new Date,
-      })
-    })
+    const miss = {
+      type: 'miss',
+      chaserId: this._id,
+    }
+    this.shots.push(miss)
+    Event.insert(_(miss).extend({ date: new Date }))
   }
 
   get goals() {
-    return Goal.find({ chaserId: this._id }).count()
+    return this.shots.filter(shot => (shot.type === 'goal')).length
   }
 
   get misses() {
-    return Miss.find({ chaserId: this._id }).count()
+    return this.shots.filter(shot => (shot.type === 'miss')).length
+  }
+
+  // if blocks were in an array, it would be hard to query for the keeper
+  get blockedGoals() {
+    return Block.find({ chaserId: this._id }).count()
   }
 
   get score() {
@@ -44,15 +50,11 @@ class Chaser extends Player {
   }
 
   get shootAttempts() {
-    return this.misses + this.goals
+    return this.misses + this.goals + this.blockedGoals
   }
 
   get accuracy() {
     return (this.goals / this.shootAttempts) * 100
-  }
-
-  get goalPercentage() {
-    return this.score / this.team.score
   }
 
 }

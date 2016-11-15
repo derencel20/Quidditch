@@ -28,6 +28,7 @@ class Game extends Model {
     return Snitch.findOne(this.snitchId)
   }
 
+  // since the snitch has also been tested, there's no need for further testing here
   get hasEnded() {
     return this.snitch.isCaught
   }
