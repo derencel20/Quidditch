@@ -3,6 +3,7 @@ import _ from 'underscore'
 import Model from './Model'
 import Team from './Team'
 import Snitch from './Snitch'
+import Event from './Event'
 
 import Idempotent from '../decorators/Idempotent'
 import SetupCollection from '../decorators/SetupCollection'
@@ -13,6 +14,7 @@ class Game extends Model {
   constructor(doc) {
     super(doc)
     this.teamIds = this.teamIds || []
+    this.eventIds = this.eventIds || []
   }
 
   @Idempotent
@@ -31,6 +33,11 @@ class Game extends Model {
   // since the snitch has also been tested, there's no need for further testing here
   get hasEnded() {
     return this.snitch.isCaught
+  }
+
+  @Idempotent
+  get events() {
+    return Event.find({ _id: { $in: this.eventIds } })
   }
 
 }
