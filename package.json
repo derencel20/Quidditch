@@ -1,9 +1,19 @@
 {
   "name": "finals",
   "private": true,
+  "config": {
+    "port": "3100",
+    "version": "1.4.2.1",
+    "mongourl": "mongodb://mongo/quidditchdb"
+  },
   "scripts": {
     "start": "meteor run",
-    "test": "meteor test --driver-package practicalmeteor:mocha -p 3100"
+    "production": "meteor --production",
+    "reset": "meteor reset",
+    "mocha": "meteor test --driver-package practicalmeteor:mocha -p $npm_package_config_port",
+    "phantom": "meteor test --once --driver-package dispatch:mocha-phantomjs --unsafe-perm",
+    "meteorDl": "curl https://install.meteor.com/?release=$npm_package_config_version",
+    "ci": "$npm_package_scripts_meteorDl | sh && export LC_All=en_US.UTF-8 && MONGO_URL=$npm_package_config_mongourl $npm_package_scripts_phantom"
   },
   "dependencies": {
     "angular": "^1.5.8",
@@ -29,7 +39,7 @@
     "babel-preset-meteor": "^6.14.0",
     "babel-preset-stage-1": "^6.16.0",
     "cz-conventional-changelog": "^1.2.0",
-	"eslint": "^3.9.1",
+    "eslint": "^3.9.1",
     "eslint-config-airbnb": "^13.0.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^2.2.3",
