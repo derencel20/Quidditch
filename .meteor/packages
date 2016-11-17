@@ -24,3 +24,4 @@ fourseven:scss
 practicalmeteor:mocha
 accounts-password
 practicalmeteor:faker
+dispatch:mocha-phantomjs
