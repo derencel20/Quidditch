@@ -18,6 +18,7 @@ module.exports = {
       "object-shorthand": ["off", "always", { "ignoreConstructors": true }],
       "no-underscore-dangle": "off",
       "func-names": ["off", "always"],
-      "linebreak-style": ["off"]
+      "linebreak-style": ["off"],
+      "arrow-body-style": ["off"]
    }
 };
