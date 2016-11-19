@@ -1,48 +1,52 @@
-import _ from 'underscore'
-
-import Model from './Model'
+import Player from './Player'
 import Event from './Event'
-import Block from './Block'
+import Goal from './Goal'
 
 import SetupCollection from '../decorators/SetupCollection'
 
 @SetupCollection('Chasers')
-class Chaser extends Model {
-
-  constructor(doc) {
-    super(doc)
-    this.shots = this.shots || []
-  }
+class Chaser extends Player {
 
   shoot() {
-    const goal = {
-      type: 'goal',
+    const goal = new Goal({
+      type: 'counted',
       chaserId: this._id,
-    }
-    this.shots.push(goal)
-    Event.insert(_(goal).extend({ date: new Date }))
+      date: new Date,
+    })
+    const id = goal.save(() => {
+      const eventId = Event.insert({ notificationType: 'counted', goalId: id, date: goal.date }, () => {
+        this.eventIds.push(eventId)
+      })
+    })
   }
 
   miss() {
-    const miss = {
-      type: 'miss',
+    const miss = new Goal({
+      type: 'missed',
       chaserId: this._id,
-    }
-    this.shots.push(miss)
-    Event.insert(_(miss).extend({ date: new Date }))
+      date: new Date,
+    })
+    const id = miss.save(() => {
+      const eventId = Event.insert({
+        notificationType: 'miss',
+        goalId: id,
+        date: miss.date,
+      }, () => {
+        this.eventIds.push(eventId)
+      })
+    })
   }
 
   get goals() {
-    return this.shots.filter(shot => (shot.type === 'goal')).length
+    return Goal.find({ type: 'counted', chaserId: this._id }).count()
   }
 
   get misses() {
-    return this.shots.filter(shot => (shot.type === 'miss')).length
+    return Goal.find({ type: 'missed', chaserId: this._id }).count()
   }
 
-  // if blocks were in an array, it would be hard to query for the keeper
   get blockedGoals() {
-    return Block.find({ chaserId: this._id }).count()
+    return Goal.find({ type: 'blocked', chaserId: this._id }).count()
   }
 
   get score() {

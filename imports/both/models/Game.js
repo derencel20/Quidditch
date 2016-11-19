@@ -14,7 +14,6 @@ class Game extends Model {
   constructor(doc) {
     super(doc)
     this.teamIds = this.teamIds || []
-    this.eventIds = this.eventIds || []
   }
 
   @Idempotent
@@ -22,8 +21,38 @@ class Game extends Model {
     return Team.find({ _id: { $in: this.teamIds } }).fetch()
   }
 
+  get chasers() {
+    let chasers = this.teams.map(team => team.chasers)
+    chasers = _(chasers).flatten()
+    return chasers.filter(chaser => !!chaser)
+  }
+
+  get keepers() {
+    let keepers = this.teams.map(team => team.keepers)
+    keepers = _(keepers).flatten()
+    return keepers.filter(keeper => !!keeper)
+  }
+
+  get seekers() {
+    let seekers = this.teams.map(team => team.seekers)
+    seekers = _(seekers).flatten()
+    return seekers.filter(seeker => !!seeker)
+  }
+
   get winner() {
     return _(this.teams).max(team => team.score)
+  }
+
+  get playerEventIds() {
+    let seekerEventIds = this.seekers.map(seeker => seeker.eventIds)
+    let keeperEventIds = this.keepers.map(keeper => keeper.eventIds)
+    let chasersEventIds = this.chasers.map(chaser => chaser.eventIds)
+
+    seekerEventIds = _(seekerEventIds).flatten()
+    keeperEventIds = _(keeperEventIds).flatten()
+    chasersEventIds = _(chasersEventIds).flatten()
+
+    return seekerEventIds.concat(keeperEventIds).concat(chasersEventIds)
   }
 
   get snitch() {
@@ -37,7 +66,11 @@ class Game extends Model {
 
   @Idempotent
   get events() {
-    return Event.find({ _id: { $in: this.eventIds } })
+    return Event.find({ _id: { $in: this.playerEventIds } }).fetch()
+  }
+
+  get title() {
+    return `${this.teams[0].name} vs ${this.teams[1].name}`
   }
 
 }

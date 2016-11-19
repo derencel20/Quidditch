@@ -2,9 +2,9 @@ import Model from './Model'
 
 import SetupCollection from '../decorators/SetupCollection'
 
-@SetupCollection('Blocks')
-class Block extends Model {
+@SetupCollection('Goal')
+class Goal extends Model {
 
 }
 
-export default Block
+export default Goal
