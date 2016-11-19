@@ -10,6 +10,10 @@ import '../views/app.html'
   abstract: true,
   html5Mode: true,
 })
+@State({
+  name: 'app.games',
+  abstract: true,
+})
 @Component({
   selector: 'app',
   templateUrl: 'imports/client/views/app.html',
