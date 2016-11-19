@@ -11,7 +11,7 @@
     "production": "meteor --production",
     "reset": "meteor reset",
     "mocha": "meteor test --driver-package practicalmeteor:mocha -p $npm_package_config_port",
-    "phantom": "sudo -i -u meteor test --once --driver-package dispatch:mocha-phantomjs --unsafe-perm",
+    "phantom": "meteor test --once --driver-package dispatch:mocha-phantomjs --unsafe-perm",
     "meteorDl": "curl https://install.meteor.com/?release=$npm_package_config_version",
     "ci": "$npm_package_scripts_meteorDl | sh && export LC_All=en_US.UTF-8 && MONGO_URL=$npm_package_config_mongourl $npm_package_scripts_phantom"
   },
