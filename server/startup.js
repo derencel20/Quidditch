@@ -36,19 +36,16 @@ function loadGames() {
         const chaser = new Chaser({
           firstName: faker.name.firstName(),
           lastName: faker.name.lastName(),
-          number: faker.random.number(),
         })
         team.chaserIds.push(chaser.save())
       }
       const keeper = new Keeper({
         firstName: faker.name.firstName(),
         lastName: faker.name.lastName(),
-        number: faker.random.number(),
       })
       const seeker = new Seeker({
         firstName: faker.name.firstName(),
         lastName: faker.name.lastName(),
-        number: faker.random.number(),
       })
       team.keeperId = keeper.save()
       team.seekerId = seeker.save()
