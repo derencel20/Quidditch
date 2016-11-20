@@ -28,13 +28,13 @@ class Game extends Model {
   }
 
   get keepers() {
-    let keepers = this.teams.map(team => team.keepers)
+    let keepers = this.teams.map(team => team.keeper)
     keepers = _(keepers).flatten()
     return keepers.filter(keeper => !!keeper)
   }
 
   get seekers() {
-    let seekers = this.teams.map(team => team.seekers)
+    let seekers = this.teams.map(team => team.seeker)
     seekers = _(seekers).flatten()
     return seekers.filter(seeker => !!seeker)
   }
