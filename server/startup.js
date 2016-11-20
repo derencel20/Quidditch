@@ -3,6 +3,7 @@
 /* eslint-disable import/no-absolute-path */
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-undef */
+/* eslint-disable no-plusplus */
 
 import Game from '/imports/both/models/Game'
 import Team from '/imports/both/models/Team'
@@ -35,16 +36,19 @@ function loadGames() {
         const chaser = new Chaser({
           firstName: faker.name.firstName(),
           lastName: faker.name.lastName(),
+          number: faker.random.number(),
         })
         team.chaserIds.push(chaser.save())
       }
       const keeper = new Keeper({
         firstName: faker.name.firstName(),
         lastName: faker.name.lastName(),
+        number: faker.random.number(),
       })
       const seeker = new Seeker({
         firstName: faker.name.firstName(),
         lastName: faker.name.lastName(),
+        number: faker.random.number(),
       })
       team.keeperId = keeper.save()
       team.seekerId = seeker.save()
