@@ -1,18 +1,11 @@
 {
   "name": "finals",
   "private": true,
-  "config": {
-    "port": "3100",
-    "version": "1.4.2.1",
-    "mongourl": "mongodb://mongo/quidditchdb"
-  },
   "scripts": {
     "start": "meteor run",
     "production": "meteor --production",
     "reset": "meteor reset",
-    "mocha": "meteor test --driver-package practicalmeteor:mocha -p $npm_package_config_port",
-    "phantom": "meteor test --once --driver-package dispatch:mocha-phantomjs --unsafe-perm",
-    "meteorDl": "curl https://install.meteor.com/?release=$npm_package_config_version",
+    "test": "meteor test --driver-package practicalmeteor:mocha -p $npm_package_config_port",
     "ci": "curl https://install.meteor.com/?release=1.4.2.1 | sh && export LC_All=en_US.UTF-8 && MONGO_URL=mongodb://mongo/quidditchdb meteor test --once --driver-package dispatch:mocha-phantomjs --unsafe-perm"
   },
   "dependencies": {
@@ -24,7 +17,7 @@
     "angular-ui-bootstrap": "^2.2.0",
     "angular-ui-router": "^0.3.2",
     "angular2-now": "^1.1.6",
-    "babel-runtime": "6.18.0",
+    "babel-runtime": "^6.18.0",
     "bcrypt": "^0.8.7",
     "bootstrap-sass": "^3.3.7",
     "meteor-node-stubs": "~0.2.0",
@@ -32,8 +25,8 @@
     "underscore": "^1.8.3"
   },
   "devDependencies": {
-    "babel-eslint": "^7.1.0",
-    "babel-plugin-transform-class-properties": "^6.18.0",
+    "babel-eslint": "^7.1.1",
+    "babel-plugin-transform-class-properties": "^6.19.0",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-preset-es2015": "^6.18.0",
     "babel-preset-meteor": "^6.14.0",
