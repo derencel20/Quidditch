@@ -13,7 +13,7 @@
     "mocha": "meteor test --driver-package practicalmeteor:mocha -p $npm_package_config_port",
     "phantom": "meteor test --once --driver-package dispatch:mocha-phantomjs --unsafe-perm",
     "meteorDl": "curl https://install.meteor.com/?release=$npm_package_config_version",
-    "ci": "$npm_package_scripts_meteorDl | sh && export LC_All=en_US.UTF-8 && MONGO_URL=$npm_package_config_mongourl $npm_package_scripts_phantom"
+    "ci": "curl https://install.meteor.com/?release=1.4.2.1 | sh && export LC_All=en_US.UTF-8 && MONGO_URL=mongodb://mongo/quidditchdb meteor test --once --driver-package dispatch:mocha-phantomjs --unsafe-perm"
   },
   "dependencies": {
     "angular": "^1.5.8",
