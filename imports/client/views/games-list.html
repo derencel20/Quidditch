@@ -6,7 +6,7 @@
   </h2>
 </div>
 <div ng-repeat="game in gamesList.games" class="gapped">
-  <div>
+  <div class="indented">
     <a class="btn btn-primary" ui-sref="app.games.view({ gameId: game._id })">{{ game.title }}</a>
   </div>
 </div>

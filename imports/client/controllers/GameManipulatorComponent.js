@@ -1,23 +1,21 @@
 /* eslint-disable import/no-absolute-path */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable import/extensions */
-/* eslint-disable import/no-extraneous-dependencies */
 
 import Game from '/imports/both/models/Game'
 import { Component, State, Inject } from 'angular2-now'
-import { Meteor } from 'meteor/meteor'
-import '../views/game-view.html'
+import '../views/game-manipulator.html'
 
 @State({
-  name: 'app.games.view',
-  url: '/games/view/:gameId',
+  name: 'app.games.view.manipulator',
+  url: '/manipulator',
 })
 @Component({
-  selector: 'game-view',
-  templateUrl: 'imports/client/views/game-view.html',
+  selector: 'game-manipulator',
+  templateUrl: 'imports/client/views/game-manipulator.html',
 })
 @Inject('$scope', '$reactive', '$state', '$stateParams')
-class GameViewComponent {
+class GameManipulatorComponent {
 
   constructor($scope, $reactive, $state, $stateParams) {
     $reactive(this).attach($scope)
@@ -29,10 +27,12 @@ class GameViewComponent {
     })
   }
 
-  get hasCommentator() {
-    return !!Meteor.user()
+  snitchAppears() {
+    const { snitch } = this.game
+    snitch.appear()
+    snitch.save()
   }
-
+  
 }
 
-export default GameViewComponent
+export default GameManipulatorComponent
