@@ -1,6 +1,155 @@
-<h2 class="indented">
-  <strong>
-    {{ gameView.game.title }}
-  </strong>
-</h2>
-<game-manipulator class="adjacent"></game-manipulator>
+<div>
+  <h2 class="indented">
+    <strong>
+      {{ gameView.game.title }}
+    </strong>
+  </h2>
+  <div class="adjacent">
+    <div class="centerDiv">
+      <button class="center btn btn-lg btn-info" ng-click="gameView.snitchAppears()" ng-disabled="gameView.game.snitch.hasAppeared">Snitch Appears!</button>
+      <div class="adjacent" ng-repeat="team in gameView.game.teams track by team._id">
+        <h3 class="gapped indented">
+          <strong>
+            {{ team.name }}
+          </strong>
+          <div class="gapped indented">
+            <h4>
+              <strong>
+                Chasers
+              </strong>
+            </h4>
+            <h5 class="indented" ng-repeat="chaser in team.chasers track by chaser._id">
+              <strong>
+                {{ chaser.lastName }}, {{ chaser.firstName }}
+              </strong>
+              <p class="gapped">
+                <button class="btn btn-sm btn-success" ng-click="chaser.shoot()" ng-disabled="gameView.game.hasEnded">Shoot</button>&nbsp;
+                <button class="btn btn-sm btn-warning" ng-click="chaser.miss()" ng-disabled="gameView.game.hasEnded">Miss</button>&nbsp;
+              </p>
+            </h5>
+            <h4>
+              <strong>
+                Keeper
+              </strong>
+            </h4>
+            <h5 class="indented">
+              <strong>
+                {{ team.keeper.lastName }}, {{ team.keeper.firstName }}
+              </strong>
+              <p></p>
+              <p class="adjacent gapped">
+                Block:&nbsp;
+                <div class="adjacent" ng-repeat="chaser in team.keeper.getEnemyChasers(gameView.game.teams) track by chaser._id">
+                  <button class="btn btn-sm btn-primary" ng-click="team.keeper.block(chaser)" ng-disabled="gameView.game.hasEnded">
+                    {{ chaser.lastName }}, {{ chaser.firstName }}
+                  </button>
+                </div>
+              </p>
+            </h5>
+            <h4>
+              <strong>
+                Seeker
+              </strong>
+            </h4>
+            <h5 class="indented">
+              <strong>
+                {{ team.seeker.lastName }}, {{ team.seeker.firstName }}
+              </strong>
+              <p class="gapped">
+                <button class="btn btn-sm btn-danger" ng-click="team.seeker.catch(gameView.game.snitch)" ng-disabled="gameView.game.hasEnded || !gameView.game.snitch.hasAppeared">
+                  Catch Snitch
+                </button>
+              </p>
+            </h5>
+          </div>
+        </h3>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="adjacent indented">
+    <div class="panel panel-warning">
+        <div class="panel-heading">Events</div>
+        <div class="panel-body pre-scrollable board">
+          <div ng-repeat="event in gameView.game.events track by event._id | orderBy:'-date':true">
+            <p ng-if="event.notificationType === 'goal counted'">
+              {{ gameView.getDefaulUTCTime(event.date) }}:
+              <strong>
+                {{ event.goal.chaser.lastName.charAt(0) }} {{ event.goal.chaser.firstName }}'s
+              </strong>
+              shot scored 10 points
+            </p>
+            <p ng-if="event.notificationType === 'goal missed'">
+              {{ gameView.getDefaulUTCTime(event.date) }}:
+              <strong>
+                {{ event.goal.chaser.lastName.charAt(0) }} {{ event.goal.chaser.firstName }}'s
+              </strong>
+              shot missed
+            </p>
+            <p ng-if="event.notificationType === 'goal blocked'">
+              {{ gameView.getDefaulUTCTime(event.date) }}:
+              <strong>
+                {{ event.goal.keeper.lastName.charAt(0) }} {{ event.goal.keeper.firstName }}
+              </strong>
+              blocked
+              <strong>
+                {{ event.goal.keeper.lastName.charAt(0) }} {{ event.goal.keeper.firstName }}'s
+              </strong>
+              shot
+            </p>
+            <p ng-if="event.notificationType === 'snitch caught'">
+              {{ gameView.getDefaulUTCTime(event.date) }}:
+              <strong>
+                {{ event.seeker.lastName.charAt(0) }} {{ event.seeker.firstName }}
+              </strong>
+              caught the snitch! The snitch lasted for
+              {{ gameView.format(event.snitch.duration )}} (hh:mm)
+              ! The Game ends!
+            </p>
+            <p ng-if="event.notificationType === 'snitch appeared'">
+              {{ gameView.getDefaulUTCTime(event.date) }}:
+              <strong>
+                The snitch has appeared!
+              </strong>
+            </p>
+          </div>
+        </div>
+    </div>
+  </div>
+
+
+
+  <div class="container">
+  <h2>Striped Rows</h2>
+  <p>The .table-striped class adds zebra-stripes to a table:</p>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>John</td>
+        <td>Doe</td>
+        <td>john@example.com</td>
+      </tr>
+      <tr>
+        <td>Mary</td>
+        <td>Moe</td>
+        <td>mary@example.com</td>
+      </tr>
+      <tr>
+        <td>July</td>
+        <td>Dooley</td>
+        <td>july@example.com</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+</div>

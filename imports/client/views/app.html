@@ -1,4 +1,8 @@
 <div style="border: 2px solid">
-  <h1></h1>
+  <button class="btn btn-link right" ui-sref="app.login" ng-if="!app.hasCommentator">
+    <strong>
+      Commentator Login
+    </strong>
+  </button>
   <div ng-transclude></div>
 </div>

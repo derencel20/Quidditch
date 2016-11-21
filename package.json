@@ -21,6 +21,7 @@
     "bcrypt": "^0.8.7",
     "bootstrap-sass": "^3.3.7",
     "meteor-node-stubs": "~0.2.0",
+    "moment": "^2.16.0",
     "ui-select": "^0.19.6",
     "underscore": "^1.8.3"
   },

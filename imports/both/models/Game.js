@@ -68,7 +68,7 @@ class Game extends Model {
 
   @Idempotent
   get events() {
-    return Event.find({ _id: { $in: [...this.playerEventIds, this.snitch.eventIds] } }).fetch()
+    return Event.find({ _id: { $in: [...this.playerEventIds, ...this.snitch.eventIds] } }).fetch()
   }
 
   get title() {

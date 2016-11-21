@@ -1,0 +1,23 @@
+<div ng-style="{ 'margin-left' : 20+'px' }" class="form-group	">
+	<table>
+		<tr>
+			<th colspan="2" ng-style="{ 'text-align' : 'center' }"><h2>Login</h2></th>
+		</tr>
+		<tr>
+			<td>
+				<strong ng-style="{ 'margin-right' : 20+'px' }" class="col-sm-6"><h3>Username: </h3></strong>
+			</td>
+			<td><input ng-style="{ 'margin-top' : 10+'px', 'text-align': 'center' }" ng-model="commentatorLogin.user.username" type="text" placeholder="Username" class="form-control"></td>
+		</tr>
+		<tr>
+			<td>
+				<strong ng-style="{ 'margin-right' : 20+'px' }" class="col-sm-6"><h3>Password:</h3></strong>
+			</td>
+			<td><input ng-style="{ 'margin-top' : 10+'px', 'text-align': 'center' }" ng-model="commentatorLogin.user.password" type="password" placeholder="Password" class="form-control"></td>
+		</tr>
+		<tr>
+			<td><button ng-style="{ 'margin-top' : 10+'px', 'margin-left' : 15+'px', 'font-size' : 15+'px' }" class="btn btn-success" ng-click="commentatorLogin.login()">Submit</button></td>
+		</tr>
+		<tr></tr>
+	</table>
+</div>

@@ -9,12 +9,16 @@ class Keeper extends Player {
 
   block(chaser) {
     const block = new Goal({
-      type: 'blocked',
+      type: 'goal blocked',
       keeperId: this._id,
       chaserId: chaser._id,
     })
     const id = block.save(() => {
-      const eventId = Event.insert({ notificationType: 'block', blockId: id, date: new Date }, () => {
+      const eventId = Event.insert({
+        notificationType: 'goal blocked',
+        goalId: id,
+        date: new Date,
+      }, () => {
         this.eventIds.push(eventId)
         this.save()
       })
