@@ -16,6 +16,7 @@ class Keeper extends Player {
     const id = block.save(() => {
       const eventId = Event.insert({ notificationType: 'block', blockId: id, date: new Date }, () => {
         this.eventIds.push(eventId)
+        this.save()
       })
     })
   }

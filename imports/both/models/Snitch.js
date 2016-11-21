@@ -22,6 +22,7 @@ class Snitch extends Model {
       date: this.appeared,
     }, () => {
       this.eventIds.push(eventId)
+      this.save()
     })
   }
 
