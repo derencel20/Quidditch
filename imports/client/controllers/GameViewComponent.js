@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable import/no-absolute-path */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable import/extensions */
@@ -5,6 +6,12 @@
 
 import Game from '/imports/both/models/Game'
 import Event from '/imports/both/models/Event'
+import Goal from '/imports/both/models/Goal'
+import Team from '/imports/both/models/Team'
+import Keeper from '/imports/both/models/Keeper'
+import Chaser from '/imports/both/models/Chaser'
+import Seeker from '/imports/both/models/Seeker'
+import Snitch from '/imports/both/models/Snitch'
 import { Component, State, Inject } from 'angular2-now'
 import { Meteor } from 'meteor/meteor'
 import moment from 'moment'
@@ -23,10 +30,25 @@ class GameViewComponent {
 
   constructor($scope, $reactive, $state, $stateParams) {
     $reactive(this).attach($scope)
+    this.subscribe('chasers')
+    this.subscribe('keepers')
+    this.subscribe('seekers')
+    this.subscribe('teams')
+    this.subscribe('goals')
+    this.subscribe('snitches')
+    this.subscribe('events')
+    this.subscribe('games')
     const { gameId } = $stateParams
     this.helpers({
       game() {
-        Event.find().fetch()
+        const games = Game.find()
+        const teams = Team.find()
+        const snitches = Snitch.find()
+        const events = Event.find()
+        const goals = Goal.find()
+        const seekers = Seeker.find()
+        const chasers = Chaser.find()
+        const keepers = Keeper.find()
         return Game.findOne(gameId)
       },
     })

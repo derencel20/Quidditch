@@ -21,10 +21,12 @@ class GamesListComponent {
 
   constructor($scope, $reactive) {
     $reactive(this).attach($scope)
+    this.subscribe('teams')
+    this.subscribe('games')
     this.helpers({
       games() {
-        Team.find().fetch()
-        return Game.find().fetch()
+        Team.find()
+        return Game.find()
       },
     })
   }

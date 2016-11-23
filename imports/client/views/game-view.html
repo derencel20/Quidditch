@@ -9,18 +9,20 @@
       <button class="center btn btn-lg btn-info" ng-click="gameView.snitchAppears()" ng-disabled="gameView.game.snitch.hasAppeared">Snitch Appears!</button>
       <div class="adjacent" ng-repeat="team in gameView.game.teams track by team._id">
         <h3 class="gapped indented">
-          <h2 ng-if="gameView.game.hasEnded && gameView.game.winner._id === team._id">
+          <h1 ng-if="gameView.game.hasEnded && gameView.game.winner._id === team._id">
             Champion
-          </h2>
-          <h2 ng-if="gameView.game.hasEnded && gameView.game.winner._id !== team._id">
+          </h1>
+          <h1 ng-if="gameView.game.hasEnded && gameView.game.winner._id !== team._id">
             Challenger
+          </h1>
+          <h2>
+            <strong>
+              {{ team.name }}
+            </strong>
           </h2>
-          <strong>
-            {{ team.name }}
-          </strong>
-          <p>
+          <h2>
             Score: {{ team.score }}
-          </p>
+          </h2>
           <div class="gapped indented">
             <h4>
               <strong>
