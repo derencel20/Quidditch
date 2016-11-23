@@ -1,9 +1,8 @@
+/* eslint-disable no-undef */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-absolute-path */
-/* eslint-disable import/no-extraneous-dependencies */
 
-import { Meteor } from 'meteor/meteor'
 import Game from '/imports/both/models/Game'
 import Goal from '/imports/both/models/Goal'
 import Team from '/imports/both/models/Team'

@@ -238,7 +238,7 @@
           {{ chaser.score }}
         </td>
         <td>
-          {{ chaser.accuracy | number: 2 }}
+          {{ chaser.accuracy | number }}%
         </td>
         <td>
           -
@@ -311,10 +311,10 @@
           <p ng-if="!gameView.game.snitch.isCaught">
             -
           </p>
-          <p ng-if="gameView.game.snitch.catcher._id === team.seeker._id && gameView.game.hasEnded">
+          <p ng-if="gameView.game.snitch.seekerId === team.seeker._id && gameView.game.hasEnded">
             Yes
           </p>
-          <p ng-if="gameView.game.snitch.catcher._id !== team.seeker._id && gameView.game.hasEnded">
+          <p ng-if="gameView.game.snitch.seekerId !== team.seeker._id && gameView.game.hasEnded">
             No
           </p>
         </td>
