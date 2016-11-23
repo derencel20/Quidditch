@@ -1,8 +1,17 @@
 <div style="border: 2px solid">
   <button class="btn btn-link right" ui-sref="app.login" ng-if="!app.hasCommentator">
-    <strong>
-      Commentator Login
-    </strong>
+    <h4>
+      <strong>
+        Commentator Login
+      </strong>
+    </h4>
+  </button>
+  <button class="btn btn-link right" ng-click="app.logout()" ng-if="app.hasCommentator">
+    <h4>
+      <strong>
+        Logout
+      </strong>
+    </h4>
   </button>
   <div ng-transclude></div>
 </div>

@@ -28,6 +28,10 @@ export default class MainComponent {
     return !!Meteor.user()
   }
 
+  logout() {
+    Meteor.logout()
+  }
+
 }
 
 bootstrap(MainComponent)

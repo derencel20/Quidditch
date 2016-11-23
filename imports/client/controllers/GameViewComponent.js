@@ -43,9 +43,9 @@ class GameViewComponent {
     return `${duration.hours()} hours: ${duration.minutes()} minutes: ${duration.seconds()} seconds`
   }
 
-  getDefaulUTCTime(date) {
-    const dateNow = moment(date)
-    return dateNow.format()
+  getDefaulUTCTime(createdAt) {
+    const createdAtNow = moment(createdAt)
+    return createdAtNow.format()
   }
 
   get hasCommentator() {
