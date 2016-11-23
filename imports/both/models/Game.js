@@ -22,21 +22,17 @@ class Game extends Model {
   }
 
   get chasers() {
-    let chasers = this.teams.map(team => team.chasers)
-    chasers = _(chasers).flatten()
-    return chasers.filter(chaser => !!chaser)
+    return this.teams.map(team => team.chasers).reduce((memo, chaser) => {
+      return memo.concat(chaser)
+    }, [])
   }
 
   get keepers() {
-    let keepers = this.teams.map(team => team.keeper)
-    keepers = _(keepers).flatten()
-    return keepers.filter(keeper => !!keeper)
+    return this.teams.map(team => team.keeper)
   }
 
   get seekers() {
-    let seekers = this.teams.map(team => team.seeker)
-    seekers = _(seekers).flatten()
-    return seekers.filter(seeker => !!seeker)
+    return this.teams.map(team => team.seeker)
   }
 
   get winner() {
