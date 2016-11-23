@@ -26,7 +26,7 @@ class Keeper extends Player {
   }
 
   get blocks() {
-    return Goal.find({ type: 'blocked', keeperId: this._id }).count()
+    return Goal.find({ type: 'goal blocked', keeperId: this._id }).count()
   }
 
   getEnemyChasers(teams) {
