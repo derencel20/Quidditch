@@ -1,6 +1,7 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-absolute-path */
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-undef */
 /* eslint-disable no-plusplus */
@@ -11,9 +12,20 @@ import Chaser from '/imports/both/models/Chaser'
 import Seeker from '/imports/both/models/Seeker'
 import Keeper from '/imports/both/models/Keeper'
 import Snitch from '/imports/both/models/Snitch'
+import { Accounts } from 'meteor/accounts-base'
 
 function loadGames() {
   if (!Game.find().count()) {
+    if (!Meteor.users.find().count()) {
+      Accounts.createUser({
+        username: 'derencel20',
+        password: 'aishiteru',
+      })
+      Accounts.createUser({
+        username: 'commentator',
+        password: '1',
+      })
+    }
     const game1 = new Game
     const game2 = new Game
     const game3 = new Game
@@ -60,9 +72,8 @@ function loadGames() {
     games[2].teamIds.push(teamIds[5])
 
     games.forEach((game) => {
-      game.snitchId = Snitch.insert({}, () => {
-        game.save()
-      })
+      game.snitchId = Snitch.insert({})
+      game.save()
     })
   }
 }
