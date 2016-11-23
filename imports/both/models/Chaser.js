@@ -52,7 +52,7 @@ class Chaser extends Player {
   }
 
   get blockedGoals() {
-    return Goal.find({ type: 'blocked', chaserId: this._id }).count()
+    return Goal.find({ type: 'goal blocked', chaserId: this._id }).count()
   }
 
   get score() {
