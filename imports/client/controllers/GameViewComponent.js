@@ -57,7 +57,6 @@ class GameViewComponent {
   snitchAppears() {
     const { snitch } = this.game
     snitch.appear()
-    snitch.save()
   }
 
   format(milliseconds) {
