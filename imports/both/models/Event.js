@@ -20,6 +20,7 @@ class Event extends Model {
     return Snitch.findOne(this.snitchId)
   }
 
+// Something Changed
 }
 
 export default Event
