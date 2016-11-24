@@ -1,5 +1,6 @@
 {
   "name": "finals",
+  "description": "Vince final project",
   "private": true,
   "scripts": {
     "start": "meteor run",
