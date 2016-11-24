@@ -14,6 +14,7 @@ class Seeker extends Player {
     snitch.caught = new Date
     snitch.save(() => {
       const eventId = Event.insert({
+        stimulatorId: this._id,
         notificationType: 'snitch caught',
         snitchId: snitch._id,
         date: snitch.caught,

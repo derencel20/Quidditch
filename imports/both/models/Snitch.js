@@ -17,6 +17,7 @@ class Snitch extends Model {
   appear() {
     this.appeared = new Date
     const eventId = Event.insert({
+      stimulatorId: this._id,
       notificationType: 'snitch appeared',
       snitchId: this._id,
       date: this.appeared,

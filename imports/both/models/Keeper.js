@@ -15,6 +15,7 @@ class Keeper extends Player {
     })
     const id = block.save(() => {
       const eventId = Event.insert({
+        stimulatorId: this._id,
         notificationType: 'goal blocked',
         goalId: id,
         date: new Date,

@@ -15,12 +15,12 @@ class Chaser extends Player {
     })
     const id = goal.save(() => {
       const eventId = Event.insert({
+        stimulatorId: this._id,
         notificationType: 'goal counted',
         goalId: id,
         date: goal.date,
       }, () => {
         this.eventIds.push(eventId)
-        this.save()
       })
     })
   }
@@ -33,6 +33,7 @@ class Chaser extends Player {
     })
     const id = miss.save(() => {
       const eventId = Event.insert({
+        stimulatorId: this._id,
         notificationType: 'goal missed',
         goalId: id,
         date: miss.date,

@@ -39,18 +39,12 @@ class Game extends Model {
     return _(this.teams).max(team => team.score)
   }
 
-  get playerEventIds() {
-    const seekerEventIds = this.seekers.map(seeker => seeker.eventIds).reduce((memo, eventId) => {
-      return memo.concat(eventId)
-    }, [])
-    const keeperEventIds = this.keepers.map(keeper => keeper.eventIds).reduce((memo, eventId) => {
-      return memo.concat(eventId)
-    }, [])
-    const chasersEventIds = this.chasers.map(chaser => chaser.eventIds).reduce((memo, eventId) => {
-      return memo.concat(eventId)
-    }, [])
+  get playerIds() {
+    const seekerIds = this.seekers.map(seeker => seeker._id)
+    const keeperIds = this.keepers.map(keeper => keeper._id)
+    const chaserIds = this.chasers.map(chaser => chaser._id)
 
-    return seekerEventIds.concat(keeperEventIds).concat(chasersEventIds)
+    return seekerIds.concat(keeperIds).concat(chaserIds)
   }
 
   get snitch() {
@@ -64,7 +58,7 @@ class Game extends Model {
 
   @Idempotent
   get events() {
-    return Event.find({ _id: { $in: [...this.playerEventIds, ...this.snitch.eventIds] } }).fetch()
+    return Event.find({ stimulatorId: { $in: [...this.playerIds, this.snitch._id] } }).fetch()
   }
 
   get title() {
