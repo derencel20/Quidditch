@@ -41,14 +41,13 @@ class GameViewComponent {
     const { gameId } = $stateParams
     this.helpers({
       game() {
-        Event.find()
-        Game.find()
-        Snitch.find()
-        Team.find()
-        Goal.find()
-        Chaser.find()
-        Keeper.find()
-        Seeker.find()
+        Event.find().fetch()
+        Snitch.find().fetch()
+        Team.find().fetch()
+        Goal.find().fetch()
+        Chaser.find().fetch()
+        Keeper.find().fetch()
+        Seeker.find().fetch()
         return Game.findOne(gameId)
       },
     })
