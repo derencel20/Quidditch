@@ -23,7 +23,7 @@ function loadGames() {
       })
       Accounts.createUser({
         username: 'commentator',
-        password: '1',
+        password: '12345678',
       })
     }
     const game1 = new Game

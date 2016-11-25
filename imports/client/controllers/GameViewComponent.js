@@ -53,11 +53,6 @@ class GameViewComponent {
     })
   }
 
-  snitchAppears() {
-    const { snitch } = this.game
-    snitch.appear()
-  }
-
   format(milliseconds) {
     const duration = moment.duration(milliseconds)
     return `${duration.hours()} hours: ${duration.minutes()} minutes: ${duration.seconds()} seconds`
