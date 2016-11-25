@@ -1,5 +1,9 @@
 @import '{}/node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss';
 
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
 .gapped {
   padding-bottom: 10px;
   padding-top: 10px;

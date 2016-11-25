@@ -6,7 +6,7 @@
   </h2>
   <div class="adjacent" ng-if="gameView.hasCommentator">
     <div class="centerDiv">
-      <button class="center btn btn-lg btn-info" ng-click="gameView.snitchAppears()" ng-disabled="gameView.game.snitch.hasAppeared">Snitch Appears!</button>
+      <button class="center btn btn-lg btn-info" ng-click="gameView.game.snitch.appears()" ng-disabled="gameView.game.snitch.hasAppeared">Snitch Appears!</button>
       <div class="adjacent" ng-repeat="team in gameView.game.teams track by team._id">
         <h3 class="gapped indented">
           <h1 ng-if="gameView.game.hasEnded && gameView.game.winner._id === team._id">
@@ -50,9 +50,9 @@
               <p></p>
               <p class="adjacent gapped">
                 Block:&nbsp;
-                <div class="adjacent" ng-repeat="chaser in team.keeper.getEnemyChasers(gameView.game.teams) track by chaser._id">
-                  <button class="btn btn-sm btn-primary" ng-click="team.keeper.block(chaser)" ng-disabled="gameView.game.hasEnded">
-                    {{ chaser.lastName }}, {{ chaser.firstName }}
+                <div class="adjacent" ng-repeat="enemyChaser in gameView.getEnemyChasers(team.keeper, gameView.game.teams) track by enemyChaser._id">
+                  <button class="btn btn-sm btn-primary" ng-click="team.keeper.block(enemyChaser)" ng-disabled="gameView.game.hasEnded">
+                    {{ enemyChaser.lastName }}, {{ enemyChaser.firstName }}
                   </button>
                 </div>
               </p>

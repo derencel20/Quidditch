@@ -3,8 +3,6 @@
 /* eslint-disable import/no-absolute-path */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-param-reassign */
-/* eslint-disable no-undef */
-/* eslint-disable no-plusplus */
 
 import Game from '/imports/both/models/Game'
 import Team from '/imports/both/models/Team'
@@ -12,6 +10,7 @@ import Chaser from '/imports/both/models/Chaser'
 import Seeker from '/imports/both/models/Seeker'
 import Keeper from '/imports/both/models/Keeper'
 import Snitch from '/imports/both/models/Snitch'
+import { Meteor } from 'meteor/meteor'
 import { Accounts } from 'meteor/accounts-base'
 
 function loadGames() {
@@ -26,53 +25,51 @@ function loadGames() {
         password: '12345678',
       })
     }
-    const game1 = new Game
-    const game2 = new Game
-    const game3 = new Game
+    const gameId1 = Game.insert({})
+    const gameId2 = Game.insert({})
+    const gameId3 = Game.insert({})
 
-    const team1 = new Team
-    const team2 = new Team
-    const team3 = new Team
-    const team4 = new Team
-    const team5 = new Team
-    const team6 = new Team
+    const teamId1 = Team.insert({})
+    const teamId2 = Team.insert({})
+    const teamId3 = Team.insert({})
+    const teamId4 = Team.insert({})
+    const teamId5 = Team.insert({})
+    const teamId6 = Team.insert({})
 
-    const games = [game1, game2, game3]
-    const teams = [team1, team2, team3, team4, team5, team6]
-    const teamIds = []
+    const gameIds = [gameId1, gameId2, gameId3]
+    const games = Game.find({ _id: { $in: gameIds } })
+    const teamIds = [teamId1, teamId2, teamId3, teamId4, teamId5, teamId6]
+    const teams = Team.find({ _id: { $in: teamIds } })
 
-    teams.forEach((team) => {
+    teams.forEach((team, index) => {
       // since there are 3 chasers per team
       team.name = faker.address.country()
-      for (let i = 0; i < 3; i++) {
+      team.gameId = gameIds[Math.floor(index / 2)]
+      for (let i = 0; i < 3; i += 1) {
         const chaser = new Chaser({
           firstName: faker.name.firstName(),
           lastName: faker.name.lastName(),
+          teamId: team._id,
         })
-        team.chaserIds.push(chaser.save())
+        chaser.save()
       }
       const keeper = new Keeper({
         firstName: faker.name.firstName(),
         lastName: faker.name.lastName(),
+        teamId: team._id,
       })
       const seeker = new Seeker({
         firstName: faker.name.firstName(),
         lastName: faker.name.lastName(),
+        teamId: team._id,
       })
-      team.keeperId = keeper.save()
-      team.seekerId = seeker.save()
+      keeper.save()
+      seeker.save()
       teamIds.push(team.save())
     })
 
-    games[0].teamIds.push(teamIds[0])
-    games[0].teamIds.push(teamIds[1])
-    games[1].teamIds.push(teamIds[2])
-    games[1].teamIds.push(teamIds[3])
-    games[2].teamIds.push(teamIds[4])
-    games[2].teamIds.push(teamIds[5])
-
     games.forEach((game) => {
-      game.snitchId = Snitch.insert({})
+      game.snitchId = Snitch.insert({ gameId: game._id })
       game.save()
     })
   }

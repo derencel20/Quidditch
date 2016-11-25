@@ -12,27 +12,20 @@ class Keeper extends Player {
       type: 'goal blocked',
       keeperId: this._id,
       chaserId: chaser._id,
+      date: new Date,
     })
     const id = block.save(() => {
-      const eventId = Event.insert({
-        stimulatorId: this._id,
+      Event.insert({
+        gameId: this.gameId,
         notificationType: 'goal blocked',
         goalId: id,
-        date: new Date,
-      }, () => {
-        this.eventIds.push(eventId)
-        this.save()
+        date: block.date,
       })
     })
   }
 
   get blocks() {
     return Goal.find({ type: 'goal blocked', keeperId: this._id }).count()
-  }
-
-  getEnemyChasers(teams) {
-    const enemyTeam = teams.find(team => (team.keeperId !== this._id))
-    return enemyTeam.chasers
   }
 
 }

@@ -4,31 +4,26 @@ import Seeker from './Seeker'
 import Event from './Event'
 
 import SetupCollection from '../decorators/SetupCollection'
-import Idempotent from '../decorators/Idempotent'
 
 @SetupCollection('Snitch')
 class Snitch extends Model {
 
-  constructor(doc) {
-    super(doc)
-    this.eventIds = this.eventIds || []
-  }
-
-  appear() {
+  appears() {
     this.appeared = new Date
-    const eventId = Event.insert({
-      stimulatorId: this._id,
+    Event.insert({
+      gameId: this.gameId,
       notificationType: 'snitch appeared',
       snitchId: this._id,
       date: this.appeared,
     }, () => {
-      this.eventIds.push(eventId)
       this.save()
     })
   }
 
   get catcher() {
-    return Seeker.findOne(this.seekerId)
+    if (this.isCaught) {
+      return Seeker.findOne(this.seekerId)
+    }
   }
 
   // returns the time(in milliSeconds) the snitch was caught
@@ -42,11 +37,6 @@ class Snitch extends Model {
 
   get isCaught() {
     return !!this.caught
-  }
-
-  @Idempotent
-  get events() {
-    Event.find({ snitchId: this._id }).fetch()
   }
 
 }

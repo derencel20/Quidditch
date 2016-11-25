@@ -2,9 +2,8 @@ import _ from 'underscore'
 
 class Model {
   constructor(doc) {
-    const abstractClasses = ['Player', 'Model']
-    if (abstractClasses.includes(this.constructor.name)) {
-      throw new Error(`${this.constructor.name} is abstract, and should not be instantiated.`)
+    if (this.constructor.name === 'Model') {
+      throw new Error('Model is abstract, and should not be instantiated.')
     }
     _(this).extend(doc)
   }

@@ -41,16 +41,18 @@ class GameViewComponent {
     const { gameId } = $stateParams
     this.helpers({
       game() {
-        Event.find().fetch()
-        Snitch.find().fetch()
-        Team.find().fetch()
-        Goal.find().fetch()
-        Chaser.find().fetch()
-        Keeper.find().fetch()
-        Seeker.find().fetch()
+        Game.find().fetch()
         return Game.findOne(gameId)
       },
     })
+  }
+
+  getEnemyChasers(keeper, teams) {
+    if (keeper) {
+      const enemyTeam = teams.find(team => (team._id !== keeper.teamId))
+      return enemyTeam.chasers
+    }
+    return 0
   }
 
   format(milliseconds) {
@@ -65,6 +67,10 @@ class GameViewComponent {
 
   get hasCommentator() {
     return !!Meteor.user()
+  }
+
+  showValue(value) {
+    console.log(value);
   }
 
 }

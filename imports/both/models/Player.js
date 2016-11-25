@@ -1,10 +1,14 @@
 import Model from './Model'
+import Team from './Team'
 
 class Player extends Model {
 
-  constructor(doc) {
-    super(doc)
-    this.eventIds = this.eventIds || []
+  get team() {
+    return Team.findOne(this.teamId)
+  }
+
+  get gameId() {
+    return this.team.gameId
   }
 
 }

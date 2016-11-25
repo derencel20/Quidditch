@@ -13,7 +13,7 @@ class Event extends Model {
   }
 
   get seeker() {
-    return Seeker.findOne(this.seekerId)
+    return Seeker.findOne(this.snitch.seekerId)
   }
 
   get snitch() {

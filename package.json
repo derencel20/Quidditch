@@ -36,6 +36,7 @@
     "cz-conventional-changelog": "^1.2.0",
     "eslint": "^3.9.1",
     "eslint-config-airbnb": "^13.0.0",
+    "eslint-import-resolver-meteor": "^0.3.4",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.6.0"

@@ -3,6 +3,9 @@ import _ from 'underscore'
 import Model from './Model'
 import Team from './Team'
 import Snitch from './Snitch'
+import Chaser from './Chaser'
+import Keeper from './Keeper'
+import Seeker from './Seeker'
 import Event from './Event'
 
 import Idempotent from '../decorators/Idempotent'
@@ -18,33 +21,26 @@ class Game extends Model {
 
   @Idempotent
   get teams() {
-    return Team.find({ _id: { $in: this.teamIds } }).fetch()
+    return Team.find({ gameId: this._id }).fetch()
   }
 
+  @Idempotent
   get chasers() {
-    return this.teams.map(team => team.chasers).reduce((memo, chaser) => {
-      return memo.concat(chaser)
-    }, [])
+    return Chaser.find({ gameId: this._id }).fetch()
   }
 
+  @Idempotent
   get keepers() {
-    return this.teams.map(team => team.keeper)
+    return Keeper.find({ gameId: this._id }).fetch()
   }
 
+  @Idempotent
   get seekers() {
-    return this.teams.map(team => team.seeker)
+    return Seeker.find({ gameId: this._id }).fetch()
   }
 
   get winner() {
     return _(this.teams).max(team => team.score)
-  }
-
-  get playerIds() {
-    const seekerIds = this.seekers.map(seeker => seeker._id)
-    const keeperIds = this.keepers.map(keeper => keeper._id)
-    const chaserIds = this.chasers.map(chaser => chaser._id)
-
-    return seekerIds.concat(keeperIds).concat(chaserIds)
   }
 
   get snitch() {
@@ -53,12 +49,15 @@ class Game extends Model {
 
   // since the snitch has also been tested, there's no need for further testing here
   get hasEnded() {
-    return this.snitch.isCaught
+    if (this.snitch) {
+      return this.snitch.isCaught
+    }
+    return false
   }
 
   @Idempotent
   get events() {
-    return Event.find({ stimulatorId: { $in: [...this.playerIds, this.snitch._id] } }).fetch()
+    return Event.find({ gameId: this._id }).fetch()
   }
 
   get title() {

@@ -19,6 +19,6 @@ module.exports = {
       "no-underscore-dangle": "off",
       "func-names": ["off", "always"],
       "linebreak-style": ["off"],
-      "arrow-body-style": ["off"]
+      "arrow-body-style": ["off"],
    }
 };
