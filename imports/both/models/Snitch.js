@@ -24,6 +24,7 @@ class Snitch extends Model {
     if (this.isCaught) {
       return Seeker.findOne(this.seekerId)
     }
+    return false
   }
 
   // returns the time(in milliSeconds) the snitch was caught

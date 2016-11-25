@@ -83,33 +83,30 @@
         <div class="panel-heading">Events</div>
         <div class="panel-body pre-scrollable board">
           <div ng-repeat="event in gameView.game.events track by event._id | orderBy:'-date':true">
+            {{ gameView.getDefaulUTCTime(event.date) }}:
             <p ng-if="event.notificationType === 'goal counted'">
-              {{ gameView.getDefaulUTCTime(event.date) }}:
               <strong>
-                {{ event.goal.chaser.lastName.charAt(0) }} {{ event.goal.chaser.firstName }}'s
+                {{ event.chaser.lastName.charAt(0) }} {{ event.chaser.firstName }}'s
               </strong>
               shot scored 10 points
             </p>
             <p ng-if="event.notificationType === 'goal missed'">
-              {{ gameView.getDefaulUTCTime(event.date) }}:
               <strong>
-                {{ event.goal.chaser.lastName.charAt(0) }} {{ event.goal.chaser.firstName }}'s
+                {{ event.chaser.lastName.charAt(0) }} {{ event.chaser.firstName }}'s
               </strong>
               shot missed
             </p>
             <p ng-if="event.notificationType === 'goal blocked'">
-              {{ gameView.getDefaulUTCTime(event.date) }}:
               <strong>
-                {{ event.goal.keeper.lastName.charAt(0) }} {{ event.goal.keeper.firstName }}
+                {{ event.keeper.lastName.charAt(0) }} {{ event.keeper.firstName }}
               </strong>
               blocked
               <strong>
-                {{ event.goal.keeper.lastName.charAt(0) }} {{ event.goal.keeper.firstName }}'s
+                {{ event.chaser.lastName.charAt(0) }} {{ event.chaser.firstName }}'s
               </strong>
               shot
             </p>
             <p ng-if="event.notificationType === 'snitch caught'">
-              {{ gameView.getDefaulUTCTime(event.date) }}:
               <strong>
                 {{ event.seeker.lastName.charAt(0) }} {{ event.seeker.firstName }}
               </strong>
@@ -127,57 +124,6 @@
         </div>
     </div>
   </div>
-
-  <div class="adjacent indented" ng-if="!gameView.hasCommentator">
-    <div class="panel panel-warning">
-        <div class="panel-heading">Events</div>
-        <div class="panel-body pre-scrollable board">
-          <div ng-repeat="event in gameView.game.events track by event._id | orderBy:'-date':true">
-            <p ng-if="event.notificationType === 'goal counted'">
-              {{ gameView.getDefaulUTCTime(event.date) }}:
-              <strong>
-                {{ event.goal.chaser.lastName.charAt(0) }} {{ event.goal.chaser.firstName }}'s
-              </strong>
-              shot scored 10 points
-            </p>
-            <p ng-if="event.notificationType === 'goal missed'">
-              {{ gameView.getDefaulUTCTime(event.date) }}:
-              <strong>
-                {{ event.goal.chaser.lastName.charAt(0) }} {{ event.goal.chaser.firstName }}'s
-              </strong>
-              shot missed
-            </p>
-            <p ng-if="event.notificationType === 'goal blocked'">
-              {{ gameView.getDefaulUTCTime(event.date) }}:
-              <strong>
-                {{ event.goal.keeper.lastName.charAt(0) }} {{ event.goal.keeper.firstName }}
-              </strong>
-              blocked
-              <strong>
-                {{ event.goal.keeper.lastName.charAt(0) }} {{ event.goal.keeper.firstName }}'s
-              </strong>
-              shot
-            </p>
-            <p ng-if="event.notificationType === 'snitch caught'">
-              {{ gameView.getDefaulUTCTime(event.date) }}:
-              <strong>
-                {{ event.seeker.lastName.charAt(0) }} {{ event.seeker.firstName }}
-              </strong>
-              caught the snitch! The snitch lasted for
-              {{ gameView.format(event.snitch.duration )}} (hh:mm)
-              ! The Game ends!
-            </p>
-            <p ng-if="event.notificationType === 'snitch appeared'">
-              {{ gameView.getDefaulUTCTime(event.date) }}:
-              <strong>
-                The snitch has appeared!
-              </strong>
-            </p>
-          </div>
-        </div>
-    </div>
-  </div>
-
 
   <div class="container adjacent indented" ng-repeat="team in gameView.game.teams track by team._id">
   <h2>{{ team.name }}</h2>

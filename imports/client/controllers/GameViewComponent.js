@@ -41,7 +41,7 @@ class GameViewComponent {
     const { gameId } = $stateParams
     this.helpers({
       game() {
-        Game.find().fetch()
+        Event.find().fetch()
         return Game.findOne(gameId)
       },
     })

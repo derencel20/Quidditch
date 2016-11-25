@@ -16,7 +16,7 @@ class Seeker extends Player {
       Event.insert({
         gameId: this.gameId,
         notificationType: 'snitch caught',
-        snitchId: snitch._id,
+        seekerId: snitch.seekerId,
         date: snitch.caught,
       })
     })
