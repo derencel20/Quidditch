@@ -14,11 +14,12 @@ class Keeper extends Player {
       chaserId: chaser._id,
       date: new Date,
     })
-    const id = block.save(() => {
+    block.save(() => {
       Event.insert({
         gameId: this.gameId,
         notificationType: 'goal blocked',
-        goalId: id,
+        keeperId: block.keeperId,
+        chaserId: block.chaserId,
         date: block.date,
       })
     })
