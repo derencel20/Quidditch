@@ -1,7 +1,6 @@
 /* eslint-disable no-param-reassign */
 
 import Player from './Player'
-import Event from './Event'
 import Snitch from './Snitch'
 
 import SetupCollection from '../decorators/SetupCollection'

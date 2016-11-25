@@ -1,6 +1,5 @@
 import Player from './Player'
 import Goal from './Goal'
-import Event from './Event'
 
 import SetupCollection from '../decorators/SetupCollection'
 
