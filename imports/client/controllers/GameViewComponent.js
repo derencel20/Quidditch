@@ -12,6 +12,7 @@ import Keeper from '/imports/both/models/Keeper'
 import Chaser from '/imports/both/models/Chaser'
 import Seeker from '/imports/both/models/Seeker'
 import Snitch from '/imports/both/models/Snitch'
+
 import { Component, State, Inject } from 'angular2-now'
 import { Meteor } from 'meteor/meteor'
 import moment from 'moment'
@@ -41,6 +42,11 @@ class GameViewComponent {
     const { gameId } = $stateParams
     this.helpers({
       game() {
+        Chaser.find().fetch()
+        Keeper.find().fetch()
+        Seeker.find().fetch()
+        Goal.find().fetch()
+        Team.find().fetch()
         Event.find().fetch()
         return Game.findOne(gameId)
       },

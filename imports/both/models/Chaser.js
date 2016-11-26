@@ -1,10 +1,11 @@
-import Player from './Player'
+import Model from './Model'
+import Event from './Event'
 import Goal from './Goal'
 
 import SetupCollection from '../decorators/SetupCollection'
 
 @SetupCollection('Chasers')
-class Chaser extends Player {
+class Chaser extends Model {
 
   shoot() {
     const goal = new Goal({

@@ -1,10 +1,11 @@
-import Player from './Player'
+import Model from './Model'
+import Event from './Event'
 import Goal from './Goal'
 
 import SetupCollection from '../decorators/SetupCollection'
 
 @SetupCollection('Keepers')
-class Keeper extends Player {
+class Keeper extends Model {
 
   block(chaser) {
     const block = new Goal({

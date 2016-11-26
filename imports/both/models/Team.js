@@ -2,7 +2,6 @@ import Model from './Model'
 import Chaser from './Chaser'
 import Seeker from './Seeker'
 import Keeper from './Keeper'
-import Game from './Game'
 
 import Idempotent from '../decorators/Idempotent'
 import SetupCollection from '../decorators/SetupCollection'
@@ -21,10 +20,6 @@ class Team extends Model {
   @Idempotent
   get chasers() {
     return Chaser.find({ teamId: this._id }).fetch()
-  }
-
-  get game() {
-    return Game.findOne(this.gameId)
   }
 
   // since i've verified that the score formula for both the chaser and seeker works,

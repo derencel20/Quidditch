@@ -49,6 +49,7 @@ function loadGames() {
         const chaser = new Chaser({
           firstName: faker.name.firstName(),
           lastName: faker.name.lastName(),
+          gameId: gameIds[Math.floor(index / 2)],
           teamId: team._id,
         })
         chaser.save()
@@ -56,11 +57,13 @@ function loadGames() {
       const keeper = new Keeper({
         firstName: faker.name.firstName(),
         lastName: faker.name.lastName(),
+        gameId: gameIds[Math.floor(index / 2)],
         teamId: team._id,
       })
       const seeker = new Seeker({
         firstName: faker.name.firstName(),
         lastName: faker.name.lastName(),
+        gameId: gameIds[Math.floor(index / 2)],
         teamId: team._id,
       })
       keeper.save()

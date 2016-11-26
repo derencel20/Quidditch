@@ -1,4 +1,5 @@
 import Model from './Model'
+import Event from './Event'
 import Seeker from './Seeker'
 
 import SetupCollection from '../decorators/SetupCollection'

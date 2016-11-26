@@ -1,12 +1,13 @@
 /* eslint-disable no-param-reassign */
 
-import Player from './Player'
+import Model from './Model'
+import Event from './Event'
 import Snitch from './Snitch'
 
 import SetupCollection from '../decorators/SetupCollection'
 
 @SetupCollection('Seekers')
-class Seeker extends Player {
+class Seeker extends Model {
 
   catch(snitch) {
     snitch.seekerId = this._id
@@ -15,6 +16,7 @@ class Seeker extends Player {
       Event.insert({
         gameId: this.gameId,
         notificationType: 'snitch caught',
+        snitchId: snitch._id,
         seekerId: snitch.seekerId,
         date: snitch.caught,
       })
