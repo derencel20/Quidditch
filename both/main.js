@@ -4,8 +4,6 @@
 
 import '/imports/both/models/Game.js'
 import '/imports/both/models/Team.js'
-import '/imports/both/models/Keeper.js'
-import '/imports/both/models/Chaser.js'
-import '/imports/both/models/Seeker.js'
+import '/imports/both/models/Player.js'
 import '/imports/both/models/Snitch.js'
 import '/imports/both/models/Event.js'

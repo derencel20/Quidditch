@@ -2,10 +2,8 @@ import _ from 'underscore'
 
 import Model from './Model'
 import Team from './Team'
+import Player from './Player'
 import Snitch from './Snitch'
-import Chaser from './Chaser'
-import Keeper from './Keeper'
-import Seeker from './Seeker'
 import Event from './Event'
 
 import Idempotent from '../decorators/Idempotent'
@@ -26,17 +24,17 @@ class Game extends Model {
 
   @Idempotent
   get chasers() {
-    return Chaser.find({ gameId: this._id }).fetch()
+    return Player.find({ gameId: this._id, role: 'Chaser' }).fetch()
   }
 
   @Idempotent
   get keepers() {
-    return Keeper.find({ gameId: this._id }).fetch()
+    return Player.find({ gameId: this._id, role: 'Keeper' }).fetch()
   }
 
   @Idempotent
   get seekers() {
-    return Seeker.find({ gameId: this._id }).fetch()
+    return Player.find({ gameId: this._id, role: 'Seeker' }).fetch()
   }
 
   get winner() {

@@ -6,9 +6,7 @@
 import Game from '/imports/both/models/Game'
 import Goal from '/imports/both/models/Goal'
 import Team from '/imports/both/models/Team'
-import Keeper from '/imports/both/models/Keeper'
-import Chaser from '/imports/both/models/Chaser'
-import Seeker from '/imports/both/models/Seeker'
+import Player from '/imports/both/models/Player'
 import Snitch from '/imports/both/models/Snitch'
 import Event from '/imports/both/models/Event'
 
@@ -16,47 +14,48 @@ import Event from '/imports/both/models/Event'
 Meteor.publish('games', () => {
   return Game.find()
 }, {
-  url: '/games',
+  url: '/publications/games',
 })
 
-Meteor.publish('chasers', () => {
-  return Chaser.find()
+Meteor.publish('game', (gameId) => {
+  return Game.find(gameId)
 }, {
-  url: '/chasers',
+  url: '/publications/games/:0',
 })
 
-Meteor.publish('keepers', () => {
-  return Keeper.find()
+Meteor.publish('players', (id) => {
+  const game = Game.findOne(id)
+  const { teams } = game
+  const teamIds = teams.map(team => team._id)
+  return Player.find({ teamId: { $in: teamIds } })
 }, {
-  url: '/keepers',
+  url: '/publications/games/:0/players',
 })
 
-Meteor.publish('seekers', () => {
-  return Seeker.find()
+Meteor.publish('goals', (id) => {
+  return Goal.find({ gameId: id })
 }, {
-  url: '/seekers',
+  url: '/publications/games/:0/goals',
 })
 
-Meteor.publish('goals', () => {
-  return Goal.find()
+Meteor.publish('snitch', (id) => {
+  return Snitch.find({ gameId: id })
 }, {
-  url: '/goals',
+  url: '/publications/games/:0/snitch',
 })
 
-Meteor.publish('snitches', () => {
-  return Snitch.find()
+Meteor.publish('events', (id) => {
+  return Event.find({ gameId: id })
 }, {
-  url: '/snitches',
+  url: '/publications/games/:0/events',
 })
 
-Meteor.publish('events', () => {
-  return Event.find()
-}, {
-  url: '/events',
-})
-
-Meteor.publish('teams', () => {
+Meteor.publish('allTeams', () => {
   return Team.find()
+})
+
+Meteor.publish('teams', (id) => {
+  return Team.find({ gameId: id })
 }, {
-  url: '/teams',
+  url: '/publications/games/:0/teams',
 })

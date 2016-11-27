@@ -8,9 +8,7 @@ import Game from '/imports/both/models/Game'
 import Event from '/imports/both/models/Event'
 import Goal from '/imports/both/models/Goal'
 import Team from '/imports/both/models/Team'
-import Keeper from '/imports/both/models/Keeper'
-import Chaser from '/imports/both/models/Chaser'
-import Seeker from '/imports/both/models/Seeker'
+import Player from '/imports/both/models/Player'
 import Snitch from '/imports/both/models/Snitch'
 
 import { Component, State, Inject } from 'angular2-now'
@@ -31,24 +29,20 @@ class GameViewComponent {
 
   constructor($scope, $reactive, $state, $stateParams) {
     $reactive(this).attach($scope)
-    this.subscribe('chasers')
-    this.subscribe('keepers')
-    this.subscribe('seekers')
-    this.subscribe('teams')
-    this.subscribe('goals')
-    this.subscribe('snitches')
-    this.subscribe('events')
-    this.subscribe('games')
     const { gameId } = $stateParams
+    this.subscribe('teams', () => [gameId])
+    this.subscribe('game', () => [gameId])
+    this.subscribe('players', () => [gameId])
+    this.subscribe('events', () => [gameId])
+    this.subscribe('goals', () => [gameId])
+    this.subscribe('snitch', () => [gameId])
     this.helpers({
       game() {
-        Chaser.find().fetch()
-        Keeper.find().fetch()
-        Seeker.find().fetch()
+        Event.find().fetch()
+        Player.find().fetch()
         Goal.find().fetch()
         Team.find().fetch()
-        Event.find().fetch()
-        return Game.findOne(gameId)
+        return Game.findOne()
       },
     })
   }

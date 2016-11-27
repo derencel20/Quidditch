@@ -21,7 +21,7 @@ class GamesListComponent {
 
   constructor($scope, $reactive) {
     $reactive(this).attach($scope)
-    this.subscribe('teams')
+    this.subscribe('allTeams')
     this.subscribe('games')
     this.helpers({
       games() {

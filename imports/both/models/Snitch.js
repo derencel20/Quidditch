@@ -1,6 +1,6 @@
 import Model from './Model'
 import Event from './Event'
-import Seeker from './Seeker'
+import Player from './Player'
 
 import SetupCollection from '../decorators/SetupCollection'
 
@@ -21,7 +21,7 @@ class Snitch extends Model {
 
   get catcher() {
     if (this.isCaught) {
-      return Seeker.findOne(this.seekerId)
+      return Player.findOne(this.seekerId)
     }
     return false
   }

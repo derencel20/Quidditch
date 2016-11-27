@@ -6,9 +6,7 @@
 
 import Game from '/imports/both/models/Game'
 import Team from '/imports/both/models/Team'
-import Chaser from '/imports/both/models/Chaser'
-import Seeker from '/imports/both/models/Seeker'
-import Keeper from '/imports/both/models/Keeper'
+import Player from '/imports/both/models/Player'
 import Snitch from '/imports/both/models/Snitch'
 import { Meteor } from 'meteor/meteor'
 import { Accounts } from 'meteor/accounts-base'
@@ -46,24 +44,24 @@ function loadGames() {
       team.name = faker.address.country()
       team.gameId = gameIds[Math.floor(index / 2)]
       for (let i = 0; i < 3; i += 1) {
-        const chaser = new Chaser({
+        const chaser = new Player({
           firstName: faker.name.firstName(),
           lastName: faker.name.lastName(),
-          gameId: gameIds[Math.floor(index / 2)],
+          role: 'Chaser',
           teamId: team._id,
         })
         chaser.save()
       }
-      const keeper = new Keeper({
+      const keeper = new Player({
         firstName: faker.name.firstName(),
         lastName: faker.name.lastName(),
-        gameId: gameIds[Math.floor(index / 2)],
+        role: 'Keeper',
         teamId: team._id,
       })
-      const seeker = new Seeker({
+      const seeker = new Player({
         firstName: faker.name.firstName(),
         lastName: faker.name.lastName(),
-        gameId: gameIds[Math.floor(index / 2)],
+        role: 'Seeker',
         teamId: team._id,
       })
       keeper.save()

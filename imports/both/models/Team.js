@@ -1,7 +1,5 @@
 import Model from './Model'
-import Chaser from './Chaser'
-import Seeker from './Seeker'
-import Keeper from './Keeper'
+import Player from './Player'
 
 import Idempotent from '../decorators/Idempotent'
 import SetupCollection from '../decorators/SetupCollection'
@@ -10,16 +8,16 @@ import SetupCollection from '../decorators/SetupCollection'
 class Team extends Model {
 
   get seeker() {
-    return Seeker.findOne({ teamId: this._id })
+    return Player.findOne({ teamId: this._id, role: 'Seeker' })
   }
 
   get keeper() {
-    return Keeper.findOne({ teamId: this._id })
+    return Player.findOne({ teamId: this._id, role: 'Keeper' })
   }
 
   @Idempotent
   get chasers() {
-    return Chaser.find({ teamId: this._id }).fetch()
+    return Player.find({ teamId: this._id, role: 'Chaser' }).fetch()
   }
 
   // since i've verified that the score formula for both the chaser and seeker works,
@@ -28,7 +26,7 @@ class Team extends Model {
   get score() {
     if (this.chasers.length !== 0 && this.seeker) {
       const chaserScores = this.chasers.reduce((memo, chaser) => (memo + chaser.score), 0)
-      return chaserScores + this.seeker.score
+      return chaserScores + this.seeker.snitchPoints
     }
     return 0
   }
