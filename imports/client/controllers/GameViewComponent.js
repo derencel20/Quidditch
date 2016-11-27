@@ -69,10 +69,6 @@ class GameViewComponent {
     return !!Meteor.user()
   }
 
-  showValue(value) {
-    console.log(value);
-  }
-
 }
 
 export default GameViewComponent
