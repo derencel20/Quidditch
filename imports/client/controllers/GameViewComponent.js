@@ -4,6 +4,8 @@
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-extraneous-dependencies */
 
+// some
+
 import Game from '/imports/both/models/Game'
 import Event from '/imports/both/models/Event'
 import Goal from '/imports/both/models/Goal'
