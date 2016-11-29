@@ -20,5 +20,11 @@ module.exports = {
       "func-names": ["off", "always"],
       "linebreak-style": ["off"],
       "arrow-body-style": ["off"],
+      "import/extensions": ["off"],
+      "import/no-extraneous-dependencies": ["off"],
+      "import/no-absolute-path": ["off"]
+   },
+   "settings": {
+     "import/resolver":  "meteor"
    }
 };
