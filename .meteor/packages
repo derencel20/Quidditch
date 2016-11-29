@@ -24,3 +24,4 @@ practicalmeteor:faker
 accounts-password
 dispatch:mocha-phantomjs
 simple:rest
+practicalmeteor:chai
