@@ -1,4 +1,5 @@
 /* eslint-disable no-param-reassign */
+/* eslint-disable new-cap */
 import { Meteor } from 'meteor/meteor'
 
 function SetupAccount(target) {
