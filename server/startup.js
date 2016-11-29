@@ -1,7 +1,3 @@
-/* eslint-disable import/no-unresolved */
-/* eslint-disable import/extensions */
-/* eslint-disable import/no-absolute-path */
-/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-param-reassign */
 
 import Game from '/imports/both/models/Game'
@@ -9,18 +5,27 @@ import Team from '/imports/both/models/Team'
 import Player from '/imports/both/models/Player'
 import Snitch from '/imports/both/models/Snitch'
 import { Meteor } from 'meteor/meteor'
+import { faker } from 'meteor/practicalmeteor:faker'
 import { Accounts } from 'meteor/accounts-base'
 
 function loadGames() {
   if (!Game.find().count()) {
     if (!Meteor.users.find().count()) {
       Accounts.createUser({
-        username: 'derencel20',
-        password: 'aishiteru',
-      })
-      Accounts.createUser({
         username: 'commentator',
         password: '12345678',
+        profile: {
+          firstName: faker.name.firstName(),
+          lastName: faker.name.lastName(),
+        },
+      })
+      Accounts.createUser({
+        username: 'derencel20',
+        password: '12345678',
+        profile: {
+          firstName: faker.name.firstName(),
+          lastName: faker.name.lastName(),
+        },
       })
     }
     const gameId1 = Game.insert({})
@@ -44,29 +49,26 @@ function loadGames() {
       team.name = faker.address.country()
       team.gameId = gameIds[Math.floor(index / 2)]
       for (let i = 0; i < 3; i += 1) {
-        const chaser = new Player({
+        Player.insert({
           firstName: faker.name.firstName(),
           lastName: faker.name.lastName(),
-          role: 'Chaser',
+          role: 'chaser',
           teamId: team._id,
         })
-        chaser.save()
       }
-      const keeper = new Player({
+      Player.insert({
         firstName: faker.name.firstName(),
         lastName: faker.name.lastName(),
-        role: 'Keeper',
+        role: 'keeper',
         teamId: team._id,
       })
-      const seeker = new Player({
+      Player.insert({
         firstName: faker.name.firstName(),
         lastName: faker.name.lastName(),
-        role: 'Seeker',
+        role: 'seeker',
         teamId: team._id,
       })
-      keeper.save()
-      seeker.save()
-      teamIds.push(team.save())
+      team.save()
     })
 
     games.forEach((game) => {
