@@ -51,4 +51,6 @@ Meteor.publish('teams', (id) => {
 
 Meteor.publish('users', () => {
   return Meteor.users.find({}, { fields: { profile: 1, _id: 1 } })
+}, {
+  url: '/publications/users',
 })
