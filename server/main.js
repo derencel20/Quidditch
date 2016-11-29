@@ -1,17 +1,12 @@
-/* eslint-disable no-undef */
-/* eslint-disable no-unused-vars */
-/* eslint-disable import/no-unresolved */
-/* eslint-disable import/extensions */
-/* eslint-disable import/no-absolute-path */
+import { Meteor } from 'meteor/meteor'
 
 import Game from '/imports/both/models/Game'
-import Goal from '/imports/both/models/Goal'
 import Team from '/imports/both/models/Team'
 import Snitch from '/imports/both/models/Snitch'
 import Player from '/imports/both/models/Player'
-import Event from '/imports/both/models/Event'
-
+import Play from '/imports/both/models/Play'
 import loadGames from './startup'
+
 
 Meteor.startup(() => {
   loadGames()
@@ -26,8 +21,11 @@ Player.collection.allow({
   },
 })
 
-Event.collection.allow({
+Play.collection.allow({
   insert(userId) {
+    return userId
+  },
+  update(userId) {
     return userId
   },
 })
@@ -37,12 +35,6 @@ Game.collection.allow({
     return userId
   },
   update(userId) {
-    return userId
-  },
-})
-
-Goal.collection.allow({
-  insert(userId) {
     return userId
   },
 })
