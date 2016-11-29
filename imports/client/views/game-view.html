@@ -84,19 +84,19 @@
         <div class="panel-body pre-scrollable board">
           <div ng-repeat="event in gameView.game.events track by event._id | orderBy:'-date':true">
             {{ gameView.getDefaulUTCTime(event.date) }}:
-            <p ng-if="event.notificationType === 'goal counted'">
+            <p ng-if="event.type === 'goal counted'">
               <strong>
                 {{ event.chaser.lastName.charAt(0) }} {{ event.chaser.firstName }}'s
               </strong>
               shot scored 10 points
             </p>
-            <p ng-if="event.notificationType === 'goal missed'">
+            <p ng-if="event.type === 'goal missed'">
               <strong>
                 {{ event.chaser.lastName.charAt(0) }} {{ event.chaser.firstName }}'s
               </strong>
               shot missed
             </p>
-            <p ng-if="event.notificationType === 'goal blocked'">
+            <p ng-if="event.type === 'goal blocked'">
               <strong>
                 {{ event.keeper.lastName.charAt(0) }} {{ event.keeper.firstName }}
               </strong>
@@ -106,7 +106,7 @@
               </strong>
               shot
             </p>
-            <p ng-if="event.notificationType === 'snitch caught'">
+            <p ng-if="event.type === 'snitch caught'">
               <strong>
                 {{ event.seeker.lastName.charAt(0) }} {{ event.seeker.firstName }}
               </strong>
@@ -114,7 +114,7 @@
               {{ gameView.format(event.snitch.duration) }}
               ! The Game ends!
             </p>
-            <p ng-if="event.notificationType === 'snitch appeared'">
+            <p ng-if="event.type === 'snitch appeared'">
               <strong>
                 The snitch has appeared!
               </strong>
@@ -124,7 +124,7 @@
     </div>
   </div>
 
-  <div class="container adjacent indented" ng-repeat="team in gameView.game.teams track by team._id">
+  <div class="container-fluid" ng-repeat="team in gameView.game.teams track by team._id">
   <h2>{{ team.name }}</h2>
   <table class="table table-striped">
     <thead>

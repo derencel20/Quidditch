@@ -1,7 +1,3 @@
-/* eslint-disable import/no-absolute-path */
-/* eslint-disable import/no-unresolved */
-/* eslint-disable import/extensions */
-
 import Game from '/imports/both/models/Game'
 import Team from '/imports/both/models/Team'
 import { Component, State, Inject } from 'angular2-now'
