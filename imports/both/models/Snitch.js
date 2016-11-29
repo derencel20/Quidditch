@@ -1,5 +1,5 @@
 import Model from './Model'
-import Event from './Event'
+import Play from './Play'
 import Player from './Player'
 
 import SetupCollection from '../decorators/SetupCollection'
@@ -8,35 +8,43 @@ import SetupCollection from '../decorators/SetupCollection'
 class Snitch extends Model {
 
   appears() {
-    this.appeared = new Date
-    Event.insert({
-      gameId: this.gameId,
-      notificationType: 'snitch appeared',
+    Play.insert({
+      type: 'snitch appeared',
       snitchId: this._id,
-      date: this.appeared,
-    }, () => {
-      this.save()
+      date: new Date,
+      gameId: this.gameId,
     })
   }
 
+  get playWhenItAppeared() {
+    return Play.findOne({ snitchId: this._id, type: 'snitch appeared' })
+  }
+
+  get playWhenItWasCaught() {
+    return Play.findOne({ snitchId: this._id, type: 'snitch caught' })
+  }
+
   get catcher() {
-    if (this.isCaught) {
-      return Player.findOne(this.seekerId)
-    }
-    return false
+    const { seekerId } = this.playWhenItWasCaught
+    return Player.findOne(seekerId)
   }
 
   // returns the time(in milliSeconds) the snitch was caught
   get duration() {
-    return this.caught.getTime() - this.appeared.getTime()
+    if (this.playWhenItAppeared && this.playWhenItWasCaught) {
+      const end = this.playWhenItWasCaught.date.getTime()
+      const start = this.playWhenItAppeared.date.getTime()
+      return end - start
+    }
+    return 0
   }
 
   get hasAppeared() {
-    return !!this.appeared
+    return !!this.playWhenItAppeared
   }
 
   get isCaught() {
-    return !!this.caught
+    return !!this.playWhenItWasCaught
   }
 
 }

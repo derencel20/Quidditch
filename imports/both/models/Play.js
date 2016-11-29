@@ -4,12 +4,8 @@ import Snitch from './Snitch'
 
 import SetupCollection from '../decorators/SetupCollection'
 
-@SetupCollection('Events')
-class Event extends Model {
-
-  get seeker() {
-    return Player.findOne(this.seekerId)
-  }
+@SetupCollection('Plays')
+class Play extends Model {
 
   get chaser() {
     return Player.findOne(this.chaserId)
@@ -19,11 +15,14 @@ class Event extends Model {
     return Player.findOne(this.keeperId)
   }
 
+  get seeker() {
+    return Player.findOne(this.seekerId)
+  }
+
   get snitch() {
     return Snitch.findOne(this.snitchId)
   }
 
-// Something Changed
 }
 
-export default Event
+export default Play

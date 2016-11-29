@@ -1,8 +1,5 @@
-/* eslint-disable no-param-reassign */
 import Model from './Model'
-import Event from './Event'
-import Goal from './Goal'
-import Snitch from './Snitch'
+import Play from './Play'
 import Team from './Team'
 
 import SetupCollection from '../decorators/SetupCollection'
@@ -12,49 +9,33 @@ class Player extends Model {
 
   // Chaser methods
   shoot() {
-    const goal = new Goal({
-      type: 'counted',
+    Play.insert({
+      type: 'goal counted',
       chaserId: this._id,
       date: new Date,
       gameId: this.gameId,
-    })
-    goal.save(() => {
-      Event.insert({
-        gameId: this.gameId,
-        notificationType: 'goal counted',
-        chaserId: goal.chaserId,
-        date: goal.date,
-      })
     })
   }
 
   miss() {
-    const miss = new Goal({
-      type: 'missed',
+    Play.insert({
+      type: 'goal missed',
       chaserId: this._id,
       date: new Date,
       gameId: this.gameId,
     })
-    miss.save(() => {
-      Event.insert({
-        gameId: this.gameId,
-        notificationType: 'goal missed',
-        chaserId: miss.chaserId,
-        date: miss.date,
-      })
-    })
   }
 
   get goals() {
-    return Goal.find({ type: 'counted', chaserId: this._id }).count()
+    return Play.find({ type: 'goal counted', chaserId: this._id }).count()
   }
 
   get misses() {
-    return Goal.find({ type: 'missed', chaserId: this._id }).count()
+    return Play.find({ type: 'goal missed', chaserId: this._id }).count()
   }
 
   get blockedGoals() {
-    return Goal.find({ type: 'blocked', chaserId: this._id }).count()
+    return Play.find({ type: 'goal blocked', chaserId: this._id }).count()
   }
 
   get score() {
@@ -72,46 +53,33 @@ class Player extends Model {
   // Keeper methods
 
   block(chaser) {
-    const block = new Goal({
-      type: 'blocked',
+    Play.insert({
+      type: 'goal blocked',
       keeperId: this._id,
       chaserId: chaser._id,
       date: new Date,
       gameId: this.gameId,
     })
-    block.save(() => {
-      Event.insert({
-        gameId: this.gameId,
-        notificationType: 'goal blocked',
-        keeperId: block.keeperId,
-        chaserId: block.chaserId,
-        date: block.date,
-      })
-    })
   }
 
   get blocks() {
-    return Goal.find({ type: 'goal blocked', keeperId: this._id }).count()
+    return Play.find({ type: 'goal blocked', keeperId: this._id }).count()
   }
 
   // Seeker Methods
 
   catch(snitch) {
-    snitch.seekerId = this._id
-    snitch.caught = new Date
-    snitch.save(() => {
-      Event.insert({
-        gameId: this.gameId,
-        notificationType: 'snitch caught',
-        snitchId: snitch._id,
-        seekerId: snitch.seekerId,
-        date: snitch.caught,
-      })
+    Play.insert({
+      type: 'snitch caught',
+      snitchId: snitch._id,
+      seekerId: this._id,
+      date: new Date,
+      gameId: this.gameId,
     })
   }
 
   get snitchPoints() {
-    return Snitch.find({ gameId: this.gameId, seekerId: this._id }).count() * 30
+    return Play.find({ type: 'snitch caught', seekerId: this._id }).count() * 30
   }
 
   // Player common methods
@@ -125,15 +93,15 @@ class Player extends Model {
   }
 
   get isChaser() {
-    return this.role === 'Chaser'
+    return this.role === 'chaser'
   }
 
   get isKeeper() {
-    return this.role === 'Keeper'
+    return this.role === 'keeper'
   }
 
   get isSeeker() {
-    return this.role === 'Seeker'
+    return this.role === 'seeker'
   }
 
 }

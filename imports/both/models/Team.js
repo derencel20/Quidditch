@@ -8,21 +8,18 @@ import SetupCollection from '../decorators/SetupCollection'
 class Team extends Model {
 
   get seeker() {
-    return Player.findOne({ teamId: this._id, role: 'Seeker' })
+    return Player.findOne({ teamId: this._id, role: 'seeker' })
   }
 
   get keeper() {
-    return Player.findOne({ teamId: this._id, role: 'Keeper' })
+    return Player.findOne({ teamId: this._id, role: 'keeper' })
   }
 
   @Idempotent
   get chasers() {
-    return Player.find({ teamId: this._id, role: 'Chaser' }).fetch()
+    return Player.find({ teamId: this._id, role: 'chaser' }).fetch()
   }
 
-  // since i've verified that the score formula for both the chaser and seeker works,
-  // i think there's no need for further testing since i'm only using reduce for adding
-  // The If is just a temporary fix. I'll refactor it later
   get score() {
     if (this.chasers.length !== 0 && this.seeker) {
       const chaserScores = this.chasers.reduce((memo, chaser) => (memo + chaser.score), 0)

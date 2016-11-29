@@ -4,18 +4,13 @@ import Model from './Model'
 import Team from './Team'
 import Player from './Player'
 import Snitch from './Snitch'
-import Event from './Event'
+import Play from './Play'
 
 import Idempotent from '../decorators/Idempotent'
 import SetupCollection from '../decorators/SetupCollection'
 
 @SetupCollection('Games')
 class Game extends Model {
-
-  constructor(doc) {
-    super(doc)
-    this.teamIds = this.teamIds || []
-  }
 
   @Idempotent
   get teams() {
@@ -24,17 +19,17 @@ class Game extends Model {
 
   @Idempotent
   get chasers() {
-    return Player.find({ gameId: this._id, role: 'Chaser' }).fetch()
+    return Player.find({ gameId: this._id, role: 'chaser' }).fetch()
   }
 
   @Idempotent
   get keepers() {
-    return Player.find({ gameId: this._id, role: 'Keeper' }).fetch()
+    return Player.find({ gameId: this._id, role: 'keeper' }).fetch()
   }
 
   @Idempotent
   get seekers() {
-    return Player.find({ gameId: this._id, role: 'Seeker' }).fetch()
+    return Player.find({ gameId: this._id, role: 'seeker' }).fetch()
   }
 
   get winner() {
@@ -55,11 +50,14 @@ class Game extends Model {
 
   @Idempotent
   get events() {
-    return Event.find({ gameId: this._id }).fetch()
+    return Play.find({ gameId: this._id }).fetch()
   }
 
   get title() {
-    return `${this.teams[0].name} vs ${this.teams[1].name}`
+    if (this.teams.length !== 0) {
+      return `${this.teams[0].name} vs ${this.teams[1].name}`
+    }
+    return ''
   }
 
 }
