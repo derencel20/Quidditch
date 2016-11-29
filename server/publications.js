@@ -1,15 +1,10 @@
-/* eslint-disable no-undef */
-/* eslint-disable import/no-unresolved */
-/* eslint-disable import/extensions */
-/* eslint-disable import/no-absolute-path */
-
 import Game from '/imports/both/models/Game'
-import Goal from '/imports/both/models/Goal'
 import Team from '/imports/both/models/Team'
 import Player from '/imports/both/models/Player'
 import Snitch from '/imports/both/models/Snitch'
-import Event from '/imports/both/models/Event'
+import Play from '/imports/both/models/Play'
 
+import { Meteor } from 'meteor/meteor'
 
 Meteor.publish('games', () => {
   return Game.find()
@@ -32,22 +27,16 @@ Meteor.publish('players', (id) => {
   url: '/publications/games/:0/players',
 })
 
-Meteor.publish('goals', (id) => {
-  return Goal.find({ gameId: id })
+Meteor.publish('plays', (id) => {
+  return Play.find({ gameId: id })
 }, {
-  url: '/publications/games/:0/goals',
+  url: '/publications/games/:0/plays',
 })
 
 Meteor.publish('snitch', (id) => {
   return Snitch.find({ gameId: id })
 }, {
   url: '/publications/games/:0/snitch',
-})
-
-Meteor.publish('events', (id) => {
-  return Event.find({ gameId: id })
-}, {
-  url: '/publications/games/:0/events',
 })
 
 Meteor.publish('allTeams', () => {
@@ -58,4 +47,8 @@ Meteor.publish('teams', (id) => {
   return Team.find({ gameId: id })
 }, {
   url: '/publications/games/:0/teams',
+})
+
+Meteor.publish('users', () => {
+  return Meteor.users.find({}, { fields: { profile: 1, _id: 1 } })
 })
