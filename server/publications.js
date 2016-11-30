@@ -41,6 +41,8 @@ Meteor.publish('snitch', (id) => {
 
 Meteor.publish('allTeams', () => {
   return Team.find()
+}, {
+  url: '/publications/teams',
 })
 
 Meteor.publish('teams', (id) => {
@@ -50,7 +52,7 @@ Meteor.publish('teams', (id) => {
 })
 
 Meteor.publish('users', () => {
-  return Meteor.users.find({}, { fields: { profile: 1, _id: 1 } })
+  return Meteor.users.find({}, { fields: { profile: 1 } })
 }, {
   url: '/publications/users',
 })
