@@ -1,18 +1,18 @@
 My Quidditch App__
 =============
-http://vince-quidditch.herokuapp.com__
+— http://vince-quidditch.herokuapp.com__
 =============
-Commentator Credentials:
+— Commentator Credentials:
 =============
-Commentator #1
+— Commentator #1
 =============
-Username: commentator
+— — Username: commentator
 =============
-Password: 12345678
+— — Password: 12345678
 =============
-Commentator #2
+— — Commentator #2
 =============
-Username: derencel20
+— — Username: derencel20
 =============
-Password: 12345678
+— — Password: 12345678
 =============
