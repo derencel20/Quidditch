@@ -29,10 +29,14 @@ class GameViewComponent {
     this.subscribe('snitch', () => [gameId])
     this.helpers({
       game() {
+        const game = Game.findOne()
+        if (!game) {
+          $state.go('app.games.list')
+        }
         Play.find().fetch()
         Player.find().fetch()
         Team.find().fetch()
-        return Game.findOne()
+        return game
       },
     })
   }
