@@ -15,6 +15,9 @@
   display: inline-block;
   padding: 5px;
 }
+.spaced {
+  padding-left: 10px;
+}
 .center {
   display: block;
   margin-left: auto;
@@ -35,12 +38,12 @@
   height: 600px;
   width: 900px;
 }
-.forcedUpward {
-  margin-top: -300px;
-}
 .relative {
   position: relative;
 }
 .right {
   float: right;
+}
+.blank {
+  padding-top: 30px;
 }

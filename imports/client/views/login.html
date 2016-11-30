@@ -1,23 +1,47 @@
-<div ng-style="{ 'margin-left' : 20+'px' }" class="form-group	">
-	<table>
-		<tr>
-			<th colspan="2" ng-style="{ 'text-align' : 'center' }"><h2>Login</h2></th>
-		</tr>
-		<tr>
-			<td>
-				<strong ng-style="{ 'margin-right' : 20+'px' }" class="col-sm-6"><h3>Username: </h3></strong>
-			</td>
-			<td><input ng-style="{ 'margin-top' : 10+'px', 'text-align': 'center' }" ng-model="commentatorLogin.user.username" type="text" placeholder="Username" class="form-control"></td>
-		</tr>
-		<tr>
-			<td>
-				<strong ng-style="{ 'margin-right' : 20+'px' }" class="col-sm-6"><h3>Password:</h3></strong>
-			</td>
-			<td><input ng-style="{ 'margin-top' : 10+'px', 'text-align': 'center' }" ng-model="commentatorLogin.user.password" type="password" placeholder="Password" class="form-control"></td>
-		</tr>
-		<tr>
-			<td><button ng-style="{ 'margin-top' : 10+'px', 'margin-left' : 15+'px', 'font-size' : 15+'px' }" class="btn btn-success" ng-click="commentatorLogin.login()">Submit</button></td>
-		</tr>
-		<tr></tr>
-	</table>
+<div class="indented">
+	<h2>
+		<strong>
+			Login
+		</strong>
+	</h2>
+	<div style="display: block;" class="table-responsive form-group">
+		<table cellpadding="2">
+			<tr>
+				<td>
+					&nbsp;
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<strong>Username: </strong>
+				</td>
+				<td>
+					<input type="text" class="indented col-sm-12 col-lg-9 col-xs-8 col-md-9 input-sm form-control" ng-model="commentatorLogin.user.username">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					&nbsp;
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<strong>Password: </strong>
+				</td>
+				<td>
+					<input type="password" class="indented col-sm-12 col-lg-9 col-xs-8 col-md-9 input-sm form-control" ng-model="commentatorLogin.user.password">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					&nbsp;
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<button class="btn btn-success" ng-click="commentatorLogin.login()">Submit</button>
+				</td>
+			</tr>
+		</table>
+	</div>
 </div>

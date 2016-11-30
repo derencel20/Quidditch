@@ -4,9 +4,13 @@
       {{ gameView.game.title }}
     </strong>
   </h2>
-  <div class="adjacent" ng-if="gameView.hasCommentator">
-    <div class="centerDiv">
-      <button class="center btn btn-lg btn-info" ng-click="gameView.game.snitch.appears()" ng-disabled="gameView.game.snitch.hasAppeared">Snitch Appears!</button>
+  <div class="blank">
+  </div>
+  <div class="centerDiv">
+    <button class="btn btn-lg btn-info" ng-click="gameView.game.snitch.appears()" ng-disabled="gameView.game.snitch.hasAppeared">Snitch Appears!</button>
+  </div>
+  <div class="centerDiv" ng-if="gameView.hasCommentator">
+    <div>
       <div class="adjacent" ng-repeat="team in gameView.game.teams track by team._id">
         <h3 class="gapped indented">
           <h1 ng-if="gameView.game.hasEnded && gameView.game.winner._id === team._id">
@@ -50,7 +54,7 @@
               <p></p>
               <p class="adjacent gapped">
                 Block:&nbsp;
-                <div class="adjacent" ng-repeat="enemyChaser in gameView.getEnemyChasers(team.keeper, gameView.game.teams) track by enemyChaser._id">
+                <div class="adjacent spaced" ng-repeat="enemyChaser in gameView.getEnemyChasers(team.keeper, gameView.game.teams) track by enemyChaser._id">
                   <button class="btn btn-sm btn-primary" ng-click="team.keeper.block(enemyChaser)" ng-disabled="gameView.game.hasEnded">
                     {{ enemyChaser.lastName }}, {{ enemyChaser.firstName }}
                   </button>
@@ -78,10 +82,10 @@
     </div>
   </div>
 
-  <div class="adjacent">
+  <div class="container-fluid">
     <div class="panel panel-warning">
         <div class="panel-heading">Events</div>
-        <div class="panel-body pre-scrollable board">
+        <div class="panel-body pre-scrollable">
           <div ng-repeat="event in gameView.game.events track by event._id | orderBy:'-date':true">
             {{ gameView.getDefaulUTCTime(event.date) }}:
             <p ng-if="event.type === 'goal counted'">
@@ -124,9 +128,9 @@
     </div>
   </div>
 
-  <div class="container-fluid" ng-repeat="team in gameView.game.teams track by team._id">
+  <div class="table-responsive table-sm" ng-repeat="team in gameView.game.teams track by team._id">
   <h2>{{ team.name }}</h2>
-  <table class="table table-striped">
+  <table class="table table-striped table-condensed">
     <thead>
       <tr>
         <th>
