@@ -5,12 +5,14 @@ My Quidditch App
 ----------------------------------------
 =============
 Commentator Credentials:
-=============
     ------------------
     | Commentator #1 |
     ------------------
         Username: commentator
         Password: 12345678
-    Commentator #2
+        
+    ------------------    
+    | Commentator #2 |
+    ------------------
         Username: derencel20
         Password: 12345678
