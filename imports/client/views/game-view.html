@@ -6,10 +6,10 @@
   </h2>
   <div class="blank">
   </div>
-  <div class="centerDiv">
-    <button class="btn btn-lg btn-info" ng-click="gameView.game.snitch.appears()" ng-disabled="gameView.game.snitch.hasAppeared">Snitch Appears!</button>
-  </div>
   <div class="centerDiv" ng-if="gameView.hasCommentator">
+    <div class="centerDiv">
+      <button class="btn btn-lg btn-info" ng-click="gameView.game.snitch.appears()" ng-disabled="gameView.game.snitch.hasAppeared">Snitch Appears!</button>
+    </div>
     <div>
       <div class="adjacent" ng-repeat="team in gameView.game.teams track by team._id">
         <h3 class="gapped indented">
