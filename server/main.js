@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor'
+import { Accounts } from 'meteor/accounts-base'
 
 import Game from '/imports/both/models/Game'
 import Team from '/imports/both/models/Team'
@@ -10,6 +11,10 @@ import loadGames from './startup'
 
 Meteor.startup(() => {
   loadGames()
+})
+
+Accounts.config({
+  forbidClientAccountCreation: true,
 })
 
 Player.collection.allow({
