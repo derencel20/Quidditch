@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-
+// change to deploy
 import Game from '/imports/both/models/Game'
 import Team from '/imports/both/models/Team'
 import Player from '/imports/both/models/Player'
